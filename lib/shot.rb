@@ -20,4 +20,8 @@ class Shot
     end
   end
 
+  def position
+    @target_position.dup
+  end
+
 end

@@ -8,8 +8,8 @@ class BattleshipsApp
 
   WELCOME_MESSAGE = "Welcome to Battleships!"
 
-  def initialize
-    @game = Battleships.new
+  def initialize(game = Battleships.new)
+    @game = game
   end
 
   def start
@@ -64,6 +64,7 @@ class BattleshipsApp
   end
 
   def next_turn_result
+    puts "Your previous shots: #{ format_shot_history(game.current_player.history) }"
     print "#{get_player_name(game.current_player)}'s turn. Enter the your target shot position: "
     position = take_and_parse_position_input
     begin
@@ -76,6 +77,15 @@ class BattleshipsApp
 
   def take_and_parse_position_input
     gets.chomp.split(' ').map(&:to_i)
+  end
+
+  def format_shot_history(history)
+    history.map do |shot|
+      {
+        position: shot.position,
+        result: shot.miss? ? 'miss' : 'HIT'
+      }
+    end
   end
 
 end

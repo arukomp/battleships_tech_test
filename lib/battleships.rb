@@ -22,7 +22,7 @@ class Battleships
 
   def winner
     return nil unless game_over?
-    return player1.board.finished? ? player2 : player1
+    player1.board.finished? ? player2 : player1
   end
 
 end
